@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-
+import { watchImg } from '../utils';
 const Highlights = () => {
   useGSAP(() => {
     gsap.to('#title', { opacity: 1, y: 0 });
@@ -15,7 +15,10 @@ const Highlights = () => {
           <h1 id="title" className="section-heading">
             Get the highlights.
           </h1>
-          <div className=""></div>
+          <div className="flex flex-wrap items-end gap-5">
+            <p className="link">Watch the film</p>
+            <img src={watchImg} />
+          </div>
         </div>
       </div>
     </section>
