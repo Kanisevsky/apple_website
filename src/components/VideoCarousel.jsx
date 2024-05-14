@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { hightlightsSlides } from '../constants';
 import { pauseImg, playImg, replayImg } from '../utils';
+import { useGSAP } from '@gsap/react';
 const VideoCarousel = () => {
   const videoRef = useRef([]);
   const videoSpanRef = useRef([]);
@@ -15,6 +16,29 @@ const VideoCarousel = () => {
   });
   const [loadedData, setLoadedData] = useState([]);
   const { isEnd, isLastVideo, startPlay, videoId, isPlaying } = video;
+  useGSAP(() => {
+    // slider animation to move the video out of the screen and bring the next video in
+    gsap.to('#slider', {
+      transform: `translateX(${-100 * videoId}%)`,
+      duration: 2,
+      ease: 'power2.inOut', // show visualizer https://gsap.com/docs/v3/Eases
+    });
+
+    // video animation to play the video when it is in the view
+    gsap.to('#video', {
+      scrollTrigger: {
+        trigger: '#video',
+        toggleActions: 'restart none none none',
+      },
+      onComplete: () => {
+        setVideo((pre) => ({
+          ...pre,
+          startPlay: true,
+          isPlaying: true,
+        }));
+      },
+    });
+  }, [isEnd, videoId]);
   useEffect(() => {
     if (loadedData.length > 3) {
       if (!isPlaying) {
