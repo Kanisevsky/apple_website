@@ -79,7 +79,12 @@ const VideoCarousel = () => {
                       key={i}
                       className="mx-2 w-3 h-3 bg-gray-200 rounded-full relative cursor-pointer"
                       ref={(e) => (videoDivRef.current[i] = e)}
-                    ></span>
+                    >
+                      <span
+                        className="absolute h-full w-full rounded-full"
+                        ref={(el) => (videoSpanRef.current[i] = el)}
+                      />
+                    </span>
                   ))}
                 </div>
               </div>
