@@ -15,6 +15,13 @@ const VideoCarousel = () => {
   const [loadedData, setLoadedData] = useState([]);
   const { isEnd, isLastVideo, startPlay, videoId, isPlaying } = video;
   useEffect(() => {
+    if (loadedData.length > 3) {
+      if (!isPlaying) {
+        videoRef.current[videoId].pause();
+      } else {
+        startPlay && videoRef.current[videoId].play();
+      }
+    }
     return () => {};
   }, [startPlay, videoId, isPlaying, loadedData]);
 
@@ -40,7 +47,21 @@ const VideoCarousel = () => {
           <div key={list.id} id="slider" className="sm:pr-20 pr-10">
             <div className="video-carousel_container">
               <div className="w-full h-full flex-center rounded-3xl overflow-hidden ng-black">
-                <video id="video" playsInline={true} preload="auto" muted>
+                <video
+                  id="video"
+                  playsInline={true}
+                  preload="auto"
+                  muted
+                  ref={(e) => {
+                    videoRef.current[i] = e;
+                  }}
+                  onPlay={() => {
+                    setVideo((prevVideo) => ({
+                      ...prevVideo,
+                      isPlaying: true,
+                    }));
+                  }}
+                >
                   <source src={list.video} type="video/mp4" />
                 </video>
               </div>
