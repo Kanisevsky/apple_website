@@ -50,7 +50,7 @@ const VideoCarousel = () => {
     return () => {};
   }, [startPlay, videoId, isPlaying, loadedData]);
 
-  const loadedMetadata = (i, e) => setLoadedData((prev) => [...prev, e]);
+  const handleLoadedMetadata = (i, e) => setLoadedData((prev) => [...prev, e]);
 
   useEffect(() => {
     const currentProgress = 0;
@@ -109,6 +109,7 @@ const VideoCarousel = () => {
                   ref={(e) => {
                     videoRef.current[i] = e;
                   }}
+                  onLoadedMetadata={(e) => handleLoadedMetadata(i, e)}
                   onPlay={() => {
                     setVideo((prevVideo) => ({
                       ...prevVideo,
