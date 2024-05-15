@@ -1,10 +1,11 @@
 import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
-import { hightlightsSlides } from '../constants';
-import { pauseImg, playImg, replayImg } from '../utils';
 import { useGSAP } from '@gsap/react';
+import { pauseImg, playImg, replayImg } from '../utils';
+import { hightlightsSlides } from '../constants';
 
 const VideoCarousel = () => {
+  // Refs to store references to video elements and progress indicators
   const videoRef = useRef([]);
   const videoSpanRef = useRef([]);
   const videoDivRef = useRef([]);
@@ -18,8 +19,8 @@ const VideoCarousel = () => {
     isPlaying: false,
   });
 
-  const [loadedData, setLoadedData] = useState([]);
   const { isEnd, isLastVideo, startPlay, videoId, isPlaying } = video;
+  const [loadedData, setLoadedData] = useState([]);
 
   useGSAP(() => {
     // slider animation to move the video out of the screen and bring the next video in
