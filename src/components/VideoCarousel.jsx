@@ -65,21 +65,21 @@ const VideoCarousel = () => {
               const progress = Math.ceil(anim.progress() * 100);
               if (progress != currentProgress) {
                 currentProgress = progress;
+                // set the width of the progress bar
+                gsap.to(videoDivRef.current[videoId], {
+                  width:
+                    window.innerWidth < 760
+                      ? '10vw'
+                      : window.innerWidth < 1200
+                      ? '10vw'
+                      : '4vw',
+                });
+                // set the background color of the progress bar
+                gsap.to(span[videoId], {
+                  width: `${currentProgress}%`,
+                  backgroundColor: 'white',
+                });
               }
-              // set the width of the progress bar
-              gsap.to(videoDivRef.current[videoId], {
-                width:
-                  window.innerWidth < 760
-                    ? '10vw'
-                    : window.innerWidth < 1200
-                    ? '10vw'
-                    : '4vw',
-              });
-              // set the background color of the progress bar
-              gsap.to(span[videoId], {
-                width: `${currentProgress}%`,
-                backgroundColor: 'white',
-              });
             },
             // when the video is ended, replace the progress bar with the indicator and change the background color
             onComplete: () => {},
