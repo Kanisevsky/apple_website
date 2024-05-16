@@ -1,6 +1,7 @@
 import { PerspectiveCamera, View } from '@react-three/drei';
 import { AmbientLight } from 'three';
-
+import Lights from './Lights';
+import { Suspense } from 'react';
 const ModelView = (
   index,
   groupRef,
@@ -20,8 +21,10 @@ const ModelView = (
         }`}
       >
         {/* Ambient Light */}
-        <AmbientLight intensity={0.3} />
-        <PerspectiveCamera makeDefault position={[0, 0]} />
+        <ambientLight intensity={0.3} />
+        <PerspectiveCamera makeDefault position={[0, 0, 4]} />
+        <Lights />
+        <Suspense fallback={<div>Loading</div>} />
       </View>
     </div>
   );
