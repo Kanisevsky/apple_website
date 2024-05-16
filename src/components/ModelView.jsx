@@ -1,4 +1,5 @@
-import { View } from '@react-three/drei';
+import { PerspectiveCamera, View } from '@react-three/drei';
+import { AmbientLight } from 'three';
 
 const ModelView = (
   index,
@@ -17,7 +18,11 @@ const ModelView = (
         className={`w-full h-full absolute ${
           index === 2 ? 'right-[-100%]' : ''
         }`}
-      ></View>
+      >
+        {/* Ambient Light */}
+        <AmbientLight intensity={0.3} />
+        <PerspectiveCamera makeDefault position={[0, 0]} />
+      </View>
     </div>
   );
 };
