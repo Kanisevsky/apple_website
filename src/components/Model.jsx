@@ -7,6 +7,7 @@ import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
 import { View } from '@react-three/drei';
 import { models, sizes } from '../constants';
+
 const Model = () => {
   const [size, setSize] = useState('small');
   const [model, setModel] = useState({
